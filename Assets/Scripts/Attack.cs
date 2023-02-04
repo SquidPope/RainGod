@@ -76,7 +76,7 @@ public class Attack : MonoBehaviour
             }
             else
             {
-                Vector2 facing = Chaahk.Instance.GetFacing();
+                Vector2 facing = Chaac.Instance.GetFacing();
 
                 //This gives us 8 way fire, even though the player will only have 4 way facing...
                 moveDir.x = facing.x;
@@ -111,7 +111,7 @@ public class Attack : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             EnemyBase enemy = other.gameObject.GetComponent<EnemyBase>();
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(damage, type);
             Debug.Log($"Hit enemy with {type}");
         }
 

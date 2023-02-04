@@ -14,6 +14,11 @@ public class EnemyBase : MonoBehaviour
 
     public EnemyManager manager;
 
+    bool isWet = false;
+    float wetTimer = 0f;
+    float wetTimerMax = 5f;
+    float wetDamageMultiplier = 2f; //ToDo: Make this global?
+
     bool isActive;
     public bool IsActive
     {
@@ -37,9 +42,15 @@ public class EnemyBase : MonoBehaviour
 
     public void SetPosition(Vector3 pos) { transform.position = pos; }
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(float amount, AttackType type)
     {
+        if (isWet && type == AttackType.Axe)
+            amount *= wetDamageMultiplier;
+
         health -= amount;
+
+        if (type == AttackType.Rain)
+            isWet = true;
 
         if (health <= 0f)
         {
@@ -53,9 +64,28 @@ public class EnemyBase : MonoBehaviour
         manager.EnemyDied();
     }
 
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Chaac.Instance.TakeDamage(damage);
+        }
+    }
+
     void Update()
     {
         //ToDo: Make a state machine?
-        transform.position = Vector3.MoveTowards(transform.position, Chaahk.Instance.GetPosition(), speed);
+        //ToDo: Only move if playing!
+        transform.position = Vector3.MoveTowards(transform.position, Chaac.Instance.GetPosition(), speed);
+
+        if (isWet)
+        {
+            wetTimer += Time.deltaTime;
+            if (wetTimer >= wetTimerMax)
+            {
+                wetTimer = 0f;
+                isWet = false;
+            }
+        }
     }
 }
