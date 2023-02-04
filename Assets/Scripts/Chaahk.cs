@@ -35,6 +35,7 @@ public class Chaahk : MonoBehaviour
     }
 
     public Vector2 GetFacing() { return lastDir; }
+    public Vector3 GetPosition() { return transform.position; }
 
     void Start()
     {
@@ -47,6 +48,7 @@ public class Chaahk : MonoBehaviour
         {
             attack = GameObject.Instantiate(attackPrefab, Vector3.zero, Quaternion.identity);
             attackPool.Add(attack.GetComponent<Attack>());
+            attackPool[attackPool.Count - 1].Init();
         }
     }
 
@@ -87,6 +89,11 @@ public class Chaahk : MonoBehaviour
         if (Input.GetMouseButtonUp(1))
         {
             Attack(AttackType.Rain);
+        }
+
+        if (Input.GetKeyUp(KeyCode.B))
+        {
+            Attack(AttackType.Bees);
         }
     }
 }
