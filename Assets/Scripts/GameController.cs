@@ -70,6 +70,11 @@ public class GameController : MonoBehaviour
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex); //ToDo: Check this
     }
 
+    public void OnQuitPressed()
+    {
+        Application.Quit();
+    }
+
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))

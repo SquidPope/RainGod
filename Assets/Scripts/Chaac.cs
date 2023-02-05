@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
+public class HealthChangeEvent : UnityEvent<float> {}
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Chaac : MonoBehaviour
@@ -11,9 +14,11 @@ public class Chaac : MonoBehaviour
     [SerializeField] float attackOffset; //ToDo: Make sure the attacks can't collide with the player
     [SerializeField] GameObject attackPrefab;
 
+    new Collider2D collider;
+
     List<Attack> attackPool; //Object pool of attacks
     Rigidbody2D rigid;
-    float speed = 70f;
+    float speed = 7f;
     Vector2 direction = Vector2.zero;
     Vector2 lastDir = Vector2.zero;
 
@@ -26,6 +31,10 @@ public class Chaac : MonoBehaviour
     int listId = 0;
 
     bool isPlaying = true;
+    bool hasBees = false;
+
+    HealthChangeEvent healthChange = new HealthChangeEvent();
+    public HealthChangeEvent HealthChange { get{ return healthChange; }}
 
     static Chaac instance;
     public static Chaac Instance
@@ -42,6 +51,16 @@ public class Chaac : MonoBehaviour
         }
     }
 
+    float Health
+    {
+        get { return health; }
+        set
+        {
+            health = value;
+            HealthChange.Invoke(health);
+        }
+    }
+
     public Vector2 GetFacing() { return lastDir; }
     public Vector3 GetPosition() { return transform.position; }
 
@@ -49,19 +68,27 @@ public class Chaac : MonoBehaviour
     {
         rigid = gameObject.GetComponent<Rigidbody2D>();
 
-        health = healthMax;
+        Health = healthMax;
+
+        collider = gameObject.GetComponent<Collider2D>();
 
         //Create a pool of attack ojects
         attackPool = new List<Attack>();
         GameObject attack;
+        
         for (int i = 0; i < attackCount; i++)
         {
             attack = GameObject.Instantiate(attackPrefab, Vector3.zero, Quaternion.identity);
-            attackPool.Add(attack.GetComponent<Attack>());
-            attackPool[attackPool.Count - 1].Init();
+            Attack a = attack.GetComponent<Attack>();
+            a.Init();
+            attackPool.Add(a);
         }
 
         GameController.Instance.StateChange.AddListener(StateChange);
+
+        //Project setting didn't work, presumably because it's using the 3D version for this 2D project, so setting it in code
+        Physics2D.IgnoreLayerCollision(6, 6);
+        
     }
 
     void StateChange(GameState state)
@@ -69,12 +96,16 @@ public class Chaac : MonoBehaviour
         isPlaying = state == GameState.Playing;
     }
 
+    public float GetMaxHealth() { return healthMax; }
+
+    public void LoseBees() { hasBees = false; }
+
     public void TakeDamage(float amount)
     {
         if (iframeTimer > 0f) //Too soon since last hit.
             return;
 
-        health -= amount;
+        Health -= amount;
 
         if (health <= 0f)
         {
@@ -99,7 +130,7 @@ public class Chaac : MonoBehaviour
             listId++;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (!isPlaying)
             return;
@@ -114,6 +145,11 @@ public class Chaac : MonoBehaviour
 
         direction = Vector2.zero; //Prevent sliding
 
+        
+    }
+
+    void Update()
+    {
         //ToDo: Limit how often Chaahk can attack, this is frankly ridiculous
         if (Input.GetMouseButtonUp(0))
         {
@@ -126,9 +162,13 @@ public class Chaac : MonoBehaviour
             Attack(AttackType.Rain);
         }
 
-        if (Input.GetKeyUp(KeyCode.B))
+        if (Input.GetKeyUp(KeyCode.B) || Input.GetKeyUp(KeyCode.Space))
         {
-            Attack(AttackType.Bees);
+            if (!hasBees)
+            {
+                Attack(AttackType.Bees);
+                hasBees = true;
+            }
         }
 
         if (iframeTimer > 0f)

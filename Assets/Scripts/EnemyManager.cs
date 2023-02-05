@@ -16,7 +16,7 @@ public class EnemyManager : MonoBehaviour
     int poolIndex = 0;
     int spawnedEnemies = 0;
 
-    float[] spawnDelays = new float[] {2f, 6f, 4f}; //ToDo: should only spawn after previous wave is dead?
+    float[] spawnDelays = new float[] {10f, 6f, 4f}; //ToDo: should only spawn after previous wave is dead?
     
     bool isSpawning = true;
     float spawnTimer = 0f;
@@ -24,6 +24,7 @@ public class EnemyManager : MonoBehaviour
     
     float waveTimer = 0f;
     int waveCounter = 0;
+    float waveDelay = 4f; //Amount of time the player gets between waves if they finish a wave with more time than this remaining.
 
     NewWaveEvent newWave = new NewWaveEvent();
     public NewWaveEvent NewWave { get { return newWave; } }
@@ -33,6 +34,7 @@ public class EnemyManager : MonoBehaviour
         get { return waveCounter; }
         set 
         {
+            //ToDo: Partially heal player at the end of each wave, amount based on quantity 
             waveCounter = value; //Should just be ++, but still
             isSpawning = true;
             NewWave.Invoke(waveCounter);
@@ -51,7 +53,7 @@ public class EnemyManager : MonoBehaviour
             enemyPool.Add(enemy.GetComponent<EnemyBase>());
             enemyPool[enemyPool.Count - 1].manager = this; //Oh dear
         }
-        
+
         WaveCounter++; //Spawn enemies right away
     }
 
@@ -59,13 +61,11 @@ public class EnemyManager : MonoBehaviour
     {
         spawnedEnemies--;
 
-        Debug.Log($"Enemy total {spawnedEnemies}");
-
         if (spawnedEnemies <= 0)
         {
             //Wave over, spawn new one!
             //ToDo: If player defeats all of a wave before the next spawns, give them a bonus to worship points (when we implement those)
-            waveTimer = waveTimer < 1f ? 1f : waveTimer; //If we have less than a second to go, leave it, otherwise take a second (instant felt wrong) 
+            waveTimer = waveTimer < waveDelay ? waveDelay : waveTimer; //If we have less than a second to go, leave it, otherwise take a second (instant felt wrong)
             spawnTimer = spawnTimerMax; //Spawn the first one right away
         }
     }

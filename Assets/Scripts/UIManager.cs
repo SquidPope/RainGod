@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -13,6 +14,10 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] TMP_Text waveGameOver;
     [SerializeField] TMP_Text timeGameOver;
+
+    [SerializeField] Slider chaacHealth;
+
+    //ToDo: Splash image announcing next wave
 
     int wave;
 
@@ -35,6 +40,9 @@ public class UIManager : MonoBehaviour
     {
         GameController.Instance.StateChange.AddListener(GameStateChange);
         GameController.Instance.GetEnemyManager().NewWave.AddListener(NewWave);
+        Chaac.Instance.HealthChange.AddListener(HealthChange);
+
+        chaacHealth.maxValue = Chaac.Instance.GetMaxHealth();
     }
 
     void GameStateChange(GameState state)
@@ -68,6 +76,8 @@ public class UIManager : MonoBehaviour
             break;
         }
     }
+
+    void HealthChange(float health) { chaacHealth.value = health; }
 
     void NewWave(int waveCount)
     {

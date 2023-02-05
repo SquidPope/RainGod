@@ -2,18 +2,17 @@ using UnityEngine;
 
 public enum AttackType {Axe, Bees, Rain}
 
-[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Collider2D))]
 public class Attack : MonoBehaviour
 {
     // Script controling the effect/hitbox of a player's attack
-    [SerializeField] Sprite axeSprite;
-    [SerializeField] Sprite beesSprite; //Hive, bees themselves are a particle around this
-    [SerializeField] Sprite rainSprite;
+
+    [SerializeField] GameObject axeIcon;
+    [SerializeField] GameObject beesIcon;
+    [SerializeField] GameObject rainIcon;
 
     float timer = 0f;
     bool isFired = false;
-    SpriteRenderer spRenderer;
     Collider2D collide;
     
     float damage;
@@ -29,27 +28,29 @@ public class Attack : MonoBehaviour
         set
         {
             type = value;
-            switch(type)
+            
+
+            switch(type) //ToDo: Flip required icon based on whether the player is facing left or right
             {
                 case AttackType.Axe:
                 damage = 4f;
-                lifespan = 0.05f;
-                speed = 30f;
-                spRenderer.sprite = axeSprite;
+                lifespan = 0.4f;
+                speed = 5f;
+                axeIcon.SetActive(true);
                 break;
 
                 case AttackType.Bees:
-                damage = 0.1f;
+                damage = 0.25f;
                 lifespan = 4f;
                 speed = 0f;
-                spRenderer.sprite = beesSprite;
+                beesIcon.SetActive(true);
                 break;
 
                 case AttackType.Rain:
                 damage = 0f;
                 lifespan = 0.3f;
                 speed = 20f;
-                spRenderer.sprite = rainSprite;
+                rainIcon.SetActive(true);
                 break;
 
                 default:
@@ -66,13 +67,17 @@ public class Attack : MonoBehaviour
         {
             isFired = value;
 
-            spRenderer.enabled = isFired;
             collide.enabled = isFired;
 
-            //Rotate based on player movement
             if (!isFired)
             {
                 timer = 0f;
+                axeIcon.SetActive(false);
+                beesIcon.SetActive(false);
+                rainIcon.SetActive(false);
+
+                if (type == AttackType.Bees)
+                    Chaac.Instance.LoseBees();
             }
             else
             {
@@ -84,29 +89,22 @@ public class Attack : MonoBehaviour
 
                 if (facing == Vector2.zero)
                     moveDir = Vector3.up; //fire upwards by default
-
-                if (facing.y == 0)
-                {
-                    if (facing.x > 0)
-                    {
-                        //set euler angles to 90 0 0? (if we have side sprites for swing, set those and use sprite collision!)
-                    }
-                }
             }
         }
     }
 
     public void SetPosition(Vector3 pos) { transform.position = pos; }
+    public Collider2D GetCollider2D() { return collide; }
 
     public void Init()
     {
-        spRenderer = gameObject.GetComponent<SpriteRenderer>();
+        //spRenderer = gameObject.GetComponent<SpriteRenderer>();
         collide = gameObject.GetComponent<Collider2D>();
 
         IsFired = false;
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionStay2D(Collision2D other) //Should fire every frame? the two collide for
     {
         if (other.gameObject.tag == "Enemy")
         {
@@ -115,11 +113,11 @@ public class Attack : MonoBehaviour
             Debug.Log($"Hit enemy with {type}");
         }
 
-        if (type != AttackType.Bees)
+        if (type == AttackType.Axe)
             IsFired = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (!isFired)
             return;
