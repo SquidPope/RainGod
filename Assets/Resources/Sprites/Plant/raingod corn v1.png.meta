@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 98d08ad58ee0427458b444ffa6acbf58
+guid: 4ef6711fe4dc11e4f8157c2999ce6883
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: enemy-c_side-Sheet_0
+      name: raingod corn v1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 196
+        height: 196
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6daecff3c96cca6499deeb49a2b0802b
-      internalID: -1706685107
+      spriteID: 919fa483d21ce1f43b1f8abe94efac51
+      internalID: 838043894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy-c_side-Sheet_1
+      name: raingod corn v1_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 196
         y: 0
-        width: 128
-        height: 128
+        width: 196
+        height: 196
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ada35a1f0d2a3a43a5d9e207ebce296
-      internalID: -318764121
+      spriteID: c472f2f75d3286745916ae73f4c7ca96
+      internalID: -1279424081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy-c_side-Sheet_2
+      name: raingod corn v1_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 392
         y: 0
-        width: 128
-        height: 128
+        width: 196
+        height: 196
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f772fe39abbae574b9e99995c9be78ba
-      internalID: 1528239946
+      spriteID: ed4fdb656eb43e44589327f7a4e6160f
+      internalID: -1935761493
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy-c_side-Sheet_3
+      name: raingod corn v1_3
       rect:
         serializedVersion: 2
-        x: 384
+        x: 588
         y: 0
-        width: 128
-        height: 128
+        width: 196
+        height: 196
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f3129b8ec3c39b4b951cb9259375c05
-      internalID: 1522486804
+      spriteID: 950d1eb6716468b40b3aee52e9099ee0
+      internalID: -1866723572
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy-c_side-Sheet_4
+      name: raingod corn v1_4
       rect:
         serializedVersion: 2
-        x: 512
+        x: 784
         y: 0
-        width: 128
-        height: 128
+        width: 196
+        height: 196
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96e43d034fad481478357a4a41f796fc
-      internalID: 868954806
+      spriteID: 64060d9dcb92a0a47a21754ddccc8029
+      internalID: 411557124
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy-c_side-Sheet_5
+      name: raingod corn v1_5
       rect:
         serializedVersion: 2
-        x: 640
+        x: 980
         y: 0
-        width: 128
-        height: 128
+        width: 196
+        height: 196
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,20 +223,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7fa399e332857941ab3dca9a6118c04
-      internalID: 950030400
+      spriteID: f2b5b071efcfd8d4ea42f2de37452910
+      internalID: -878985832
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy-c_side-Sheet_6
+      name: raingod corn v1_6
       rect:
         serializedVersion: 2
-        x: 768
+        x: 1176
         y: 0
-        width: 128
-        height: 128
+        width: 196
+        height: 196
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,8 +244,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fed1110cf0696394cbd5934791a86bdf
-      internalID: 940157977
+      spriteID: d2d7e561f81b6be4ead2ce80d46dc3b5
+      internalID: -1881178643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: raingod corn v1_7
+      rect:
+        serializedVersion: 2
+        x: 1372
+        y: 0
+        width: 196
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c36cc991829f1be4c98a6bc9ece4e2e3
+      internalID: -605410714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: raingod corn v1_8
+      rect:
+        serializedVersion: 2
+        x: 1568
+        y: 0
+        width: 196
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2920cd23ae65c6041abe17a237130cc9
+      internalID: -1911461026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: raingod corn v1_9
+      rect:
+        serializedVersion: 2
+        x: 1764
+        y: 0
+        width: 196
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa3b7bd1af9bbaf45802f2a7a60abb0a
+      internalID: 468019626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: raingod corn v1_10
+      rect:
+        serializedVersion: 2
+        x: 1960
+        y: 0
+        width: 196
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c49dcd0d960d1347a63ca6067420f07
+      internalID: -377493955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: raingod corn v1_11
+      rect:
+        serializedVersion: 2
+        x: 2156
+        y: 0
+        width: 196
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a0b834f45e332f40b06dbe9e8efb399
+      internalID: -1018287101
       vertices: []
       indices: 
       edges: []
@@ -261,13 +366,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      enemy-c_side-Sheet_5: 950030400
-      enemy-c_side-Sheet_6: 940157977
-      enemy-c_side-Sheet_0: -1706685107
-      enemy-c_side-Sheet_2: 1528239946
-      enemy-c_side-Sheet_3: 1522486804
-      enemy-c_side-Sheet_4: 868954806
-      enemy-c_side-Sheet_1: -318764121
+      raingod corn v1_9: 468019626
+      raingod corn v1_3: -1866723572
+      raingod corn v1_2: -1935761493
+      raingod corn v1_0: 838043894
+      raingod corn v1_11: -1018287101
+      raingod corn v1_7: -605410714
+      raingod corn v1_6: -1881178643
+      raingod corn v1_4: 411557124
+      raingod corn v1_5: -878985832
+      raingod corn v1_1: -1279424081
+      raingod corn v1_8: -1911461026
+      raingod corn v1_10: -377493955
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
