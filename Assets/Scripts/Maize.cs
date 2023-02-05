@@ -11,6 +11,7 @@ public class Maize : MonoBehaviour
     //timer?
     [SerializeField] Sprite[] growthSprites;
     [SerializeField] new SpriteRenderer renderer;
+    [SerializeField] float healAmount = 5f;
     GrowthState growth = GrowthState.Sprout;
 
     bool isWet = false;
@@ -42,8 +43,22 @@ public class Maize : MonoBehaviour
     void Start()
     {
         Growth = GrowthState.Sprout;
+        GameController.Instance.GetEnemyManager().NewWave.AddListener(NewWave);
     }
-    
+
+    void NewWave(int wave)
+    {
+        if (growth == GrowthState.Corn)
+        {
+            Chaac.Instance.Heal(healAmount);
+        }  
+        else
+        {
+            if (isWet)
+                timer = growthTimerMax; //grow immediately
+        }
+    }
+
     GrowthState Growth
     {
         get { return growth; }
@@ -52,6 +67,7 @@ public class Maize : MonoBehaviour
             growth = value;
             //set art based on growth state
             renderer.sprite = growthSprites[(int)growth];
+            Debug.Log($"growth {growth}");
         }
     }
 
@@ -129,7 +145,7 @@ public class Maize : MonoBehaviour
                 {
                     if (Growth == GrowthState.WitheredSprout)
                         Growth = GrowthState.Sprout;
-                    else if (Growth == GrowthState.WitheredCorn)
+                    else if (Growth == GrowthState.WitheredCorn || Growth == GrowthState.Sprout)
                         Growth = GrowthState.Corn;
 
                     timer = 0f;

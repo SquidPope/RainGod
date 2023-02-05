@@ -7,7 +7,7 @@ public class EnemyBase : MonoBehaviour
 {
     // Base script for an enemy
     // ToDo: We have 3 colors of enemy, make them act differently
-    
+
     [SerializeField] EnemyAnimator animator;
     protected float speed = 0.01f; //ToDo: change based on enemy type
     protected float damage = 5f;
@@ -71,7 +71,6 @@ public class EnemyBase : MonoBehaviour
             amount *= wetDamageMultiplier;
 
         health -= amount;
-        Debug.Log($"Took {amount} damage");
 
         if (type == AttackType.Rain) //ToDo: Slight blue tint or particle effect?
         {

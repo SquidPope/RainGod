@@ -110,7 +110,6 @@ public class Attack : MonoBehaviour
         {
             EnemyBase enemy = other.gameObject.GetComponent<EnemyBase>();
             enemy.TakeDamage(damage, type);
-            Debug.Log($"Hit enemy with {type}");
         }
 
         if (type == AttackType.Axe)
@@ -121,6 +120,7 @@ public class Attack : MonoBehaviour
     {
         if (other.tag == "Maize")
         {
+            Debug.Log("HIT THE CORN");
             Maize maize = other.GetComponent<Maize>();
             maize.AttackHit(type);
         }

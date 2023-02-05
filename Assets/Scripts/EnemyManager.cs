@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] int enemyCount; //max a wave can possibly have
     [SerializeField] GameObject[] enemyPrefabs;
-    [SerializeField] Transform spawnPoint; //ToDo: Random from a list of points?
+    [SerializeField] Transform[] spawnPoints; //ToDo: Random from a list of points?
 
     List<EnemyBase> enemyPool;
     int poolIndex = 0;
@@ -25,6 +25,8 @@ public class EnemyManager : MonoBehaviour
     float waveTimer = 0f;
     int waveCounter = 0;
     float waveDelay = 4f; //Amount of time the player gets between waves if they finish a wave with more time than this remaining.
+
+    bool isPlaying = true;
 
     NewWaveEvent newWave = new NewWaveEvent();
     public NewWaveEvent NewWave { get { return newWave; } }
@@ -56,7 +58,11 @@ public class EnemyManager : MonoBehaviour
         }
 
         WaveCounter++; //Spawn enemies right away
+
+        GameController.Instance.StateChange.AddListener(StateChange);
     }
+
+    void StateChange(GameState state) { isPlaying = state == GameState.Playing; }
 
     public void EnemyDied()
     {
@@ -73,6 +79,9 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
+        if (!isPlaying)
+            return;
+            
         if (isSpawning)
         {
             spawnTimer += Time.deltaTime;
@@ -81,7 +90,8 @@ public class EnemyManager : MonoBehaviour
                 //spawn enemies on a timer until we have the total we need
                 EnemyBase current = enemyPool[poolIndex];
                 //ToDo: Make sure enemy selected is inactive
-                current.SetPosition(spawnPoint.position);
+                int rand = Random.Range(0, spawnPoints.Length - 1);
+                current.SetPosition(spawnPoints[rand].position);
                 current.IsActive = true;
                 spawnedEnemies++;
                 spawnTimer = 0f;

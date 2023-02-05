@@ -47,6 +47,7 @@ public class UIManager : MonoBehaviour
 
     void GameStateChange(GameState state)
     {
+        Debug.Log($"state {state}");
         switch(state)
         {
             case GameState.Playing:
@@ -69,7 +70,10 @@ public class UIManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             waveGameOver.text = $"Waves Cleared: {wave}"; //last wave cleared
-            timeGameOver.text = $"Time: {Time.timeSinceLevelLoad}"; //ToDo: might not be what we want, also needs to be formated
+            float time = Time.timeSinceLevelLoad;
+            string min = Mathf.Floor(time / 60f).ToString("00"); //ToDo: A time of over an hour probaly breaks this, banking on nobody lasting that long
+            string sec = Mathf.Floor(time % 60).ToString("00");
+            timeGameOver.text = $"Time: {min} : {sec}";
             break;
 
             default:

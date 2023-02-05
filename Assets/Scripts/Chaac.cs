@@ -61,6 +61,12 @@ public class Chaac : MonoBehaviour
         }
     }
 
+    public void Heal(float amount)
+    {
+        health += amount;
+        health = health > healthMax ? healthMax : health;
+    }
+
     public Vector2 GetFacing() { return lastDir; }
     public Vector3 GetPosition() { return transform.position; }
 
@@ -150,6 +156,9 @@ public class Chaac : MonoBehaviour
 
     void Update()
     {
+        if (!isPlaying)
+            return;
+            
         //ToDo: Limit how often Chaahk can attack, this is frankly ridiculous
         if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Joystick1Button0) || Input.GetKeyUp(KeyCode.Joystick1Button4))
         {

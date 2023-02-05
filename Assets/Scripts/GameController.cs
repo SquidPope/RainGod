@@ -37,6 +37,9 @@ public class GameController : MonoBehaviour
         get { return state; }
         set
         {
+            if (state == value && state == GameState.Over) //Don't end the game when we already did
+                return;
+
             state = value;
             if (state == GameState.Paused)
                 Time.timeScale = 0f;
@@ -61,7 +64,7 @@ public class GameController : MonoBehaviour
 
     public void OnMenuPressed()
     {
-        //load menu
+        SceneManager.LoadSceneAsync("MainMenu");
     }
 
     public void OnRetryPressed()
