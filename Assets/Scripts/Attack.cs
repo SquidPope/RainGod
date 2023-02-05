@@ -117,6 +117,15 @@ public class Attack : MonoBehaviour
             IsFired = false;
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Maize")
+        {
+            Maize maize = other.GetComponent<Maize>();
+            maize.AttackHit(type);
+        }
+    }
+
     void FixedUpdate()
     {
         if (!isFired)

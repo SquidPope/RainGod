@@ -16,7 +16,7 @@ public class EnemyAnimator : MonoBehaviour
     {
         if (move.y > 0 && move.y > move.x) //If we're moving more up than left
         {
-            animator.runtimeAnimatorController = up;
+            animator.runtimeAnimatorController = up; //ToDo: Change this? Apparently swapping animators like this without a transition can cause that long Unity error
         }
         else if (move.y < 0 && move.y < move.x) //If we're moving more down than right
         {

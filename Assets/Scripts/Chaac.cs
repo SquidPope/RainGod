@@ -151,18 +151,18 @@ public class Chaac : MonoBehaviour
     void Update()
     {
         //ToDo: Limit how often Chaahk can attack, this is frankly ridiculous
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Joystick1Button0) || Input.GetKeyUp(KeyCode.Joystick1Button4))
         {
             //ToDo: Move to a separate function, right click is all this but different attack type
             Attack(AttackType.Axe);
         }
         
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1) || Input.GetKeyUp(KeyCode.Joystick1Button3) || Input.GetKeyUp(KeyCode.Joystick1Button5))
         {
             Attack(AttackType.Rain);
         }
 
-        if (Input.GetKeyUp(KeyCode.B) || Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.B) || Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Joystick1Button1))
         {
             if (!hasBees)
             {

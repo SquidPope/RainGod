@@ -77,7 +77,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.Joystick1Button7) || Input.GetKeyUp(KeyCode.Joystick1Button2))
         {
             if (State == GameState.Playing)
                 State = GameState.Paused;
