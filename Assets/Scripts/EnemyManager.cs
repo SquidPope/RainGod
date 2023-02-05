@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
     // Script to keep track of and manage enemies
 
     [SerializeField] int enemyCount; //max a wave can possibly have
-    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] GameObject[] enemyPrefabs;
     [SerializeField] Transform spawnPoint; //ToDo: Random from a list of points?
 
     List<EnemyBase> enemyPool;
@@ -49,7 +49,8 @@ public class EnemyManager : MonoBehaviour
         GameObject enemy;
         for (int i = 0; i < enemyCount; i++)
         {
-            enemy = GameObject.Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity);
+            int rand = Random.Range(0, enemyPrefabs.Length);
+            enemy = GameObject.Instantiate(enemyPrefabs[rand], Vector3.zero, Quaternion.identity); //ToDo: Randomize on activate? select enemies for the wave?
             enemyPool.Add(enemy.GetComponent<EnemyBase>());
             enemyPool[enemyPool.Count - 1].manager = this; //Oh dear
         }

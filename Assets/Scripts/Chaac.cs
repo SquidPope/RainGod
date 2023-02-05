@@ -14,7 +14,7 @@ public class Chaac : MonoBehaviour
     [SerializeField] float attackOffset; //ToDo: Make sure the attacks can't collide with the player
     [SerializeField] GameObject attackPrefab;
 
-    new Collider2D collider;
+    [SerializeField] ChaacAnimator anim;
 
     List<Attack> attackPool; //Object pool of attacks
     Rigidbody2D rigid;
@@ -69,8 +69,6 @@ public class Chaac : MonoBehaviour
         rigid = gameObject.GetComponent<Rigidbody2D>();
 
         Health = healthMax;
-
-        collider = gameObject.GetComponent<Collider2D>();
 
         //Create a pool of attack ojects
         attackPool = new List<Attack>();
@@ -142,6 +140,8 @@ public class Chaac : MonoBehaviour
 
         if (direction.x != 0 || direction.y != 0)
             lastDir = direction; //Save the latest non-zero input, use for attack direction
+
+        anim.UpdateSprite(lastDir);
 
         direction = Vector2.zero; //Prevent sliding
 

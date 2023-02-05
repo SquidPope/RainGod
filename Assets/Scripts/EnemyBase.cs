@@ -6,6 +6,9 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour
 {
     // Base script for an enemy
+    // ToDo: We have 3 colors of enemy, make them act differently
+    
+    [SerializeField] EnemyAnimator animator;
     protected float speed = 0.01f; //ToDo: change based on enemy type
     protected float damage = 5f;
     protected float health = 10;
@@ -120,5 +123,6 @@ public class EnemyBase : MonoBehaviour
             return;
 
         transform.position = Vector3.MoveTowards(transform.position, Chaac.Instance.GetPosition(), speed);
+        animator.UpdateSprite(Chaac.Instance.GetPosition() - transform.position);
     }
 }
